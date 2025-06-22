@@ -12,9 +12,7 @@ export type UserDocument = HydratedDocument<User>;
   timestamps: true,
 })
 export class User {
-  /**
-   * @description Unique identifier for the user
-   */
+  
   @ApiProperty({ example: '123e4567-e89b-12d3-a456-426614174000' })
   @Prop({
     unique: true,
@@ -42,6 +40,11 @@ export class User {
   @ApiProperty({ example: '2021-09-01T00:00:00.000Z' })
   @Prop({ default: Date.now })
   updatedAt: Date;
+
+  @ApiProperty({ example: ['123e4567-e89b-12d3-a456-426614174000'] })
+  @Prop( { type: [Types.ObjectId], ref: 'Todo', required: false })
+  todos: Types.ObjectId[];
+
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
